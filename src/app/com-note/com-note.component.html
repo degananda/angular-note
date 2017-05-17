@@ -1,8 +1,10 @@
 <div class="note">
   <div class="note_content">
-    Hello, ini note saya :D
+    {{isi_note}} <br />
+    {{isi_note | uppercase | pipeSensor}} <br />
+    date created : {{tanggalNote | date:'medium' }}
   </div>
   <div class="note_action">
-    <a class="btn">Edit</a> <a class="btn">Delete</a>
+    <a class="btn" (click)="editNote()">Edit</a> <a class="btn">Delete</a>
   </div>
 </div>
