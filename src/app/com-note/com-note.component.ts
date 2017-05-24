@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-com-note',
@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComNoteComponent implements OnInit {
 
-  isi_note : String;
+  @Input() isiNote;
+  @Output() onDelete = new EventEmitter();
+
+  // styling
+  isVisible = true;
+
   tanggalNote : any;
 
   constructor() { 
@@ -19,7 +24,6 @@ export class ComNoteComponent implements OnInit {
 
   ngOnInit() {
     // menginisiasi isi dari note.
-    this.isi_note = 'Hello ini note saya';
     this.tanggalNote = new Date().getTime();
   }
 
@@ -29,7 +33,31 @@ export class ComNoteComponent implements OnInit {
 
   editNote(){
     // mengubah isi note.
-    this.isi_note = 'Hello note ini telah diubah.';
+  }
+
+  deleteNote(){
+    // emit id dari note, karena kita belum membuat model dan service dari note maka sementara kita isikan "1" sebagai id dummy. 
+    console.log('oiii');
+    this.onDelete.emit('1');
+  }
+  
+  /*
+    Element styling
+  */
+
+  onShowHide(){
+    // set nilai isVisible dengan nilai kebalikannya.
+    this.isVisible = !this.isVisible;
+  }
+
+  setShowHideStyle(){
+    if(this.isVisible){
+      // jika nilai visible true maka element di tampilkan
+      return 'block';
+    } else {
+      // jika nilai visible false maka element di hilangkan
+      return 'none';
+    }
   }
 
 }

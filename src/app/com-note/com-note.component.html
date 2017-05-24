@@ -1,10 +1,46 @@
 <div class="note">
   <div class="note_content">
-    {{isi_note}} <br />
-    {{isi_note | uppercase | pipeSensor}} <br />
-    date created : {{tanggalNote | date:'medium' }}
-  </div>
-  <div class="note_action">
-    <a class="btn" (click)="editNote()">Edit</a> <a class="btn">Delete</a>
+
+    <!-- bagian kiri note untuk menampilkan isi dari note dan tombol action -->
+    <div class="left_side">
+
+      <!-- wrapper isi note -->
+      <div class="isi_note_wrapper" [style.display]="setShowHideStyle()">
+
+        <!-- isi note -->
+        <div class="isi_note">
+          {{isiNote}} <br />
+          {{isiNote | uppercase | pipeSensor}} <br />
+          date created : {{tanggalNote | date:'medium' }}
+        </div>
+
+        <!-- tombol action dari note -->
+        <div class="note_action">
+          <span class="btn" routerLink="/note/modify/1">Edit</span> 
+          <span class="btn" (click)="deleteNote()">Delete</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- bagian kanan note untuk menampilkan opsi hide -->
+    <div class="right_side">
+      <!-- opsi hide -->
+      <span (click)="onShowHide()">
+
+        <span *ngIf="isVisible">
+          hide
+        </span>
+
+        <span *ngIf="!isVisible">
+          show
+        </span>
+
+      </span>
+    </div>
+
+    <div style="clear: both;"></div><!-- clear float -->
+
   </div>
 </div>
