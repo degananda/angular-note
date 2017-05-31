@@ -1,14 +1,10 @@
-
-<div class="edit_note_form">
-  <div>
-    <span routerLink="/">Back</span>
-  </div>
+<div class="add_note_form">
   <form [formGroup]="noteForm" (ngSubmit)="onSubmit(noteForm.value)">
     <p>
       <textarea type="text" formControlName="isi_note" placehoder="Masukan note" rows="10" style="width: 100%;"></textarea>
     </p>
     <p>
-      <button type="submit" [disabled]="!noteForm.valid">Ubah</button>
+      <button type="submit" [disabled]="!noteForm.valid">Tambah</button>
     </p>
   </form>
 </div>

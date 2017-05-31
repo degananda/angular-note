@@ -9,14 +9,17 @@
 
         <!-- isi note -->
         <div class="isi_note">
-          {{isiNote}} <br />
-          {{isiNote | uppercase | pipeSensor}} <br />
-          date created : {{tanggalNote | date:'medium' }}
+          <p>
+            {{isiNote.isi_note}}
+          </p>
+          <p>
+            {{isiNote.tanggal_note | date:'medium'}}
+          </p>
         </div>
 
         <!-- tombol action dari note -->
         <div class="note_action">
-          <span class="btn" routerLink="/note/modify/1">Edit</span> 
+          <span class="btn" (click)="modifyNote()">Edit</span> 
           <span class="btn" (click)="deleteNote()">Delete</span>
         </div>
 

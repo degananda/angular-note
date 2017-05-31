@@ -1,3 +1,13 @@
-<app-com-note [isiNote]="noteList[0]" (onDelete)="onDeleteNote($event)"></app-com-note>
+<h1>
+    Angular 2/4 CRUD dengan Singleton (tanpa DBMS)
+</h1>
+<app-com-addnote></app-com-addnote>
+
+<div *ngFor="let note of serviceNoteService.listNote;">
+    <app-com-note [isiNote]="note" (onDelete)="onDeleteNote($event)"></app-com-note>
+</div>
+
+<!--
 <app-com-note [isiNote]="noteList[1]" (onDelete)="onDeleteNote($event)"></app-com-note>
 <app-com-note [isiNote]="noteList[2]" (onDelete)="onDeleteNote($event)"></app-com-note>
+-->

@@ -1,4 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { NoteModel } from './../note-model';
+import { Router } from '@angular/router';
+// services
+import { ServiceNoteService } from './../service-note.service';
 
 @Component({
   selector: 'app-com-note',
@@ -7,7 +11,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ComNoteComponent implements OnInit {
 
-  @Input() isiNote;
+  @Input() isiNote : NoteModel;
   @Output() onDelete = new EventEmitter();
 
   // styling
@@ -15,7 +19,10 @@ export class ComNoteComponent implements OnInit {
 
   tanggalNote : any;
 
-  constructor() { 
+  constructor(
+    private router : Router,
+    private serviceNoteService : ServiceNoteService
+  ) { 
   }
 
   /*
@@ -30,15 +37,15 @@ export class ComNoteComponent implements OnInit {
   /*
     Event action.
   */
-
-  editNote(){
-    // mengubah isi note.
-  }
-
+  
   deleteNote(){
     // emit id dari note, karena kita belum membuat model dan service dari note maka sementara kita isikan "1" sebagai id dummy. 
-    console.log('oiii');
-    this.onDelete.emit('1');
+    this.onDelete.emit(this.isiNote);
+  }
+
+  modifyNote(){
+    let noteIndex = this.serviceNoteService.getNoteIndex(this.isiNote);
+    this.router.navigate(['/note/modify/'+noteIndex]);
   }
   
   /*

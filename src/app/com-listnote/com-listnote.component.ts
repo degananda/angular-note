@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceNoteService } from './../service-note.service';
+import { NoteModel } from './../note-model';
 
 @Component({
   selector: 'app-com-listnote',
@@ -7,19 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComListnoteComponent implements OnInit {
 
-  noteList : Array<string> = [];
+  listNote : Array<NoteModel>;
 
-  constructor() { }
+  constructor(
+    private serviceNoteService : ServiceNoteService
+  ) { }
 
   ngOnInit() {
-    this.noteList[0] = "hello ini note pertama";
-    this.noteList[1] = "hello ini note kedua";
-    this.noteList[2] = "hello ini note ketiga";
+    this.listNote = this.serviceNoteService.getNote();
   }
 
-  onDeleteNote(id){
-    alert('melakukan delete note');
-    console.log(id);
+  onDeleteNote(note : NoteModel){
+    this.serviceNoteService.deleteNote(note);
   }
 
 }

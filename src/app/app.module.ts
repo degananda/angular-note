@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 // component
@@ -13,6 +13,10 @@ import { ComListnoteComponent } from './com-listnote/com-listnote.component';
 // routing
 import { myRouter } from './app.router';
 
+// services
+import { ServiceNoteService } from './service-note.service';
+import { ComAddnoteComponent } from './com-addnote/com-addnote.component';
+
 // dari newbie untuk newbie
 @NgModule({
   declarations: [
@@ -20,15 +24,18 @@ import { myRouter } from './app.router';
     ComNoteComponent,
     PipeSensorPipe,
     FormNoteComponent,
-    ComListnoteComponent
+    ComListnoteComponent,
+    ComAddnoteComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     myRouter
   ],
-  providers: [],
+  providers: [
+    ServiceNoteService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
