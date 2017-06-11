@@ -1,14 +1,17 @@
+<md-toolbar color="primary">Angular Note</md-toolbar>
 
 <div class="edit_note_form">
   <div>
-    <span routerLink="/">Back</span>
+    <button md-raised-button routerLink="/" color="accent">Back</button>
   </div>
   <form [formGroup]="noteForm" (ngSubmit)="onSubmit(noteForm.value)">
     <p>
-      <textarea type="text" formControlName="isi_note" placehoder="Masukan note" rows="10" style="width: 100%;"></textarea>
+      <md-input-container style="width: 100%;">
+        <textarea mdInput placeholder="Isi Catatan" formControlName="isi_note" placehoder="Masukan note" cols="5"></textarea>
+      </md-input-container>
     </p>
     <p>
-      <button type="submit" [disabled]="!noteForm.valid">Ubah</button>
+      <button md-raised-button color="primary" type="submit" [disabled]="!noteForm.valid">Ubah</button>
     </p>
   </form>
 </div>

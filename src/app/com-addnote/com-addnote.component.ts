@@ -4,6 +4,9 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ServiceNoteService } from './../service-note.service';
 // model
 import { NoteModel } from './../note-model';
+// angular material
+import {MdSnackBar} from '@angular/material';
+
 
 @Component({
   selector: 'app-com-addnote',
@@ -16,8 +19,15 @@ export class ComAddnoteComponent implements OnInit {
 
   constructor(
     private fb : FormBuilder,
-    private serviceNoteService : ServiceNoteService
+    private serviceNoteService : ServiceNoteService,
+    private snackBar : MdSnackBar
   ) { }
+
+  openSnackBar() {
+     this.snackBar.open('note berhasil dibuat', 'sukses', {
+      duration: 2000,
+    });
+  }
 
   ngOnInit() {
     // inisiasi form
@@ -34,6 +44,7 @@ export class ComAddnoteComponent implements OnInit {
     this.serviceNoteService.addNote(myNote);
     // reset form
     this.noteForm.reset();
+    this.openSnackBar();
   }
 
 }

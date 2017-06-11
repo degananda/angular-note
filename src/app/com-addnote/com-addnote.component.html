@@ -1,10 +1,12 @@
 <div class="add_note_form">
   <form [formGroup]="noteForm" (ngSubmit)="onSubmit(noteForm.value)">
     <p>
-      <textarea type="text" formControlName="isi_note" placehoder="Masukan note" rows="10" style="width: 100%;"></textarea>
+      <md-input-container style="width: 100%;" mdTooltip="Masukan isi note">
+        <textarea mdInput placeholder="Isi Catatan" formControlName="isi_note" placehoder="Masukan note" cols="5"></textarea>
+      </md-input-container>
     </p>
     <p>
-      <button type="submit" [disabled]="!noteForm.valid">Tambah</button>
+      <button md-raised-button color="primary" type="submit" [disabled]="!noteForm.valid">Tambah</button>
     </p>
   </form>
 </div>

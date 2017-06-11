@@ -1,11 +1,13 @@
-<h1>
-    Angular 2/4 CRUD dengan Singleton (tanpa DBMS)
-</h1>
+<md-toolbar color="primary">Angular Note</md-toolbar>
+<!-- add note form -->
 <app-com-addnote></app-com-addnote>
+<!-- end of add note form -->
 
-<div *ngFor="let note of serviceNoteService.listNote;">
-    <app-com-note [isiNote]="note" (onDelete)="onDeleteNote($event)"></app-com-note>
-</div>
+<md-list style="width: 100%;">  
+    <div style="margin-left: 50px; margin-right: 50px;" *ngFor="let note of serviceNoteService.listNote;">  
+            <app-com-note [isiNote]="note" (onDelete)="onDeleteNote($event)"></app-com-note>
+    </div>
+</md-list>
 
 <!--
 <app-com-note [isiNote]="noteList[1]" (onDelete)="onDeleteNote($event)"></app-com-note>

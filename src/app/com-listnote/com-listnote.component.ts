@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceNoteService } from './../service-note.service';
 import { NoteModel } from './../note-model';
+// angular material
+import {MdSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-com-listnote',
@@ -11,9 +13,19 @@ export class ComListnoteComponent implements OnInit {
 
   listNote : Array<NoteModel>;
 
+
+
   constructor(
-    private serviceNoteService : ServiceNoteService
+    public serviceNoteService : ServiceNoteService,
+    private snackBar : MdSnackBar
   ) { }
+
+  openSnackBar() {
+     this.snackBar.open('note telah dihapus', 'sukses', {
+      duration: 2000,
+    });
+  }
+
 
   ngOnInit() {
     this.listNote = this.serviceNoteService.getNote();
@@ -21,6 +33,7 @@ export class ComListnoteComponent implements OnInit {
 
   onDeleteNote(note : NoteModel){
     this.serviceNoteService.deleteNote(note);
+    this.openSnackBar();
   }
 
 }

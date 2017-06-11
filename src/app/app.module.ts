@@ -10,6 +10,19 @@ import { PipeSensorPipe } from './pipe-sensor.pipe';
 import { FormNoteComponent } from './form-note/form-note.component';
 import { ComListnoteComponent } from './com-listnote/com-listnote.component';
 
+// material & animations
+import { 
+  MdButtonModule, 
+  MdInputModule,
+  MdListModule,
+  MdToolbarModule,
+  MdIconModule,
+  MdSnackBarModule,
+  MdTooltipModule,
+  MdMenuModule
+} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 // routing
 import { myRouter } from './app.router';
 
@@ -31,7 +44,18 @@ import { ComAddnoteComponent } from './com-addnote/com-addnote.component';
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
-    myRouter
+    myRouter,
+    BrowserAnimationsModule,
+    // material component
+    MdButtonModule,
+    MdInputModule,
+    MdListModule,
+    MdToolbarModule,
+    MdIconModule,
+    MdSnackBarModule,
+    MdTooltipModule,
+    MdMenuModule
+    // end of material component
   ],
   providers: [
     ServiceNoteService

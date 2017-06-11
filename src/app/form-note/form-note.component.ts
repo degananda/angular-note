@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 // service
 import { ServiceNoteService } from './../service-note.service';
 // model 
 import { NoteModel } from './../note-model';
+// angular material
+import {MdSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-form-note',
@@ -25,9 +27,18 @@ export class FormNoteComponent implements OnInit {
   constructor(
     private fb : FormBuilder,
     private activatedRoute : ActivatedRoute,
-    private serviceNoteService : ServiceNoteService
+    private serviceNoteService : ServiceNoteService,
+    private snackBar : MdSnackBar,
+    private router : Router
   ) { 
 
+  }
+
+
+  openSnackBar() {
+     this.snackBar.open('note berhasil diubah', 'sukses', {
+      duration: 2000,
+    });
   }
 
   ngOnDestroy(){
@@ -38,6 +49,11 @@ export class FormNoteComponent implements OnInit {
   }
 
   ngOnInit() {
+    // insiiasi from setelah note data 
+    this.noteForm = this.fb.group({
+      isi_note : this.fb.control('', [Validators.required])
+    });
+
     // get note index
     this.routeSubscription = this.activatedRoute.params.subscribe(
       (res) => {
@@ -47,10 +63,9 @@ export class FormNoteComponent implements OnInit {
         // get note setelah subscription karena kita membutuhkan noteIndex dari parameter routing.
         this.noteData = this.serviceNoteService.getNoteSingle(this.noteIndex);
         if(this.noteData){
-        // insiiasi from setelah note data 
-        this.noteForm = this.fb.group({
-          isi_note : this.fb.control(this.noteData.isi_note, [Validators.required])
-        });
+          this.noteForm.controls['isi_note'].setValue(this.noteData.isi_note);
+        } else {
+          this.router.navigate(['/']);
         }
 
       }
@@ -62,6 +77,7 @@ export class FormNoteComponent implements OnInit {
     this.noteData.isi_note = value.isi_note;
     this.noteData.tanggal_note = newTimetamp.toString();
     this.serviceNoteService.ubahNote(this.noteIndex, this.noteData);
+    this.openSnackBar();
   }
 
 }
