@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 // component
@@ -21,7 +21,9 @@ import {
   MdTooltipModule,
   MdMenuModule,
   MdCardModule,
-  MdProgressSpinnerModule
+  MdProgressSpinnerModule,
+  MdSelectModule,
+  MdOptionModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -34,6 +36,7 @@ import { ComAddnoteComponent } from './com-addnote/com-addnote.component';
 import { PipeSearchPipe } from './pipe-search.pipe';
 import { ComSearchComponent } from './com-search/com-search.component';
 import { ComLoadingComponent } from './com-loading/com-loading.component';
+import { PipeSortPipe } from './pipe-sort.pipe';
 
 // dari newbie untuk newbie
 @NgModule({
@@ -46,11 +49,13 @@ import { ComLoadingComponent } from './com-loading/com-loading.component';
     ComAddnoteComponent,
     PipeSearchPipe,
     ComSearchComponent,
-    ComLoadingComponent
+    ComLoadingComponent,
+    PipeSortPipe
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpModule,
     myRouter,
     BrowserAnimationsModule,
@@ -64,7 +69,9 @@ import { ComLoadingComponent } from './com-loading/com-loading.component';
     MdTooltipModule,
     MdMenuModule,
     MdCardModule,
-    MdProgressSpinnerModule
+    MdProgressSpinnerModule,
+    MdSelectModule,
+    MdOptionModule
     // end of material component
   ],
   providers: [

@@ -14,6 +14,12 @@ export class ComListnoteComponent implements OnInit {
   listNote : Array<NoteModel>;
   searchQuery = "";
   onSearchLoading = false;
+  searchTypeValue: string = 'asc';
+
+  sortOption = [
+    {value: 'asc', viewValue: 'ascending'},
+    {value: 'desc', viewValue: 'descending'},
+  ];
 
   constructor(
     public serviceNoteService : ServiceNoteService,

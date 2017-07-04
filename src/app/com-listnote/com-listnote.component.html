@@ -1,4 +1,4 @@
-<md-toolbar color="primary">Angular Note</md-toolbar>
+<md-toolbar color="primary">Angular Note &mdash; Chapter 8.0</md-toolbar>
 <!-- search form -->
 <app-com-search (searchQueryElement)="doSearch($event)" (onSearchLoading)="onLoadingChange($event)"></app-com-search>
 <!-- end of search form -->
@@ -16,8 +16,22 @@
     <!-- end of loading component -->
 
     <div *ngIf="!onSearchLoading">
-        <div style="margin-left: 50px; margin-right: 50px;" *ngFor="let note of (serviceNoteService.listNote | pipeSearch:searchQuery)">  
-                <app-com-note [isiNote]="note" (onDelete)="onDeleteNote($event)"></app-com-note>
+        <div style="margin-left: 50px; margin-right: 50px;">
+            <!-- sort option -->
+            <div style="float: right;">
+                <md-select placeholder="pilih tipe sort" [(ngModel)]="searchTypeValue">
+                    <md-option *ngFor="let sortoption of sortOption" [value]="sortoption.value">
+                    {{sortoption.viewValue}}
+                    </md-option>
+                </md-select>
+            </div>
+            <div style="clear:both;"></div>
+
+            <p> Tipe sort : {{searchTypeValue}} </p>
+
+            <div *ngFor="let note of (serviceNoteService.listNote | pipeSort:searchTypeValue | pipeSearch:searchQuery)">  
+                    <app-com-note [isiNote]="note" (onDelete)="onDeleteNote($event)"></app-com-note>
+            </div>
         </div>
     </div>
 
