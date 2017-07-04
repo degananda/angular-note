@@ -1,15 +1,16 @@
 <md-toolbar color="primary">Angular Note</md-toolbar>
+<!-- search form -->
+<app-com-search (searchQueryElement)="doSearch($event)"></app-com-search>
+<!-- end of search form -->
+
 <!-- add note form -->
 <app-com-addnote></app-com-addnote>
 <!-- end of add note form -->
 
+
+
 <md-list style="width: 100%;">  
-    <div style="margin-left: 50px; margin-right: 50px;" *ngFor="let note of serviceNoteService.listNote;">  
+    <div style="margin-left: 50px; margin-right: 50px;" *ngFor="let note of (serviceNoteService.listNote | pipeSearch:searchQuery)">  
             <app-com-note [isiNote]="note" (onDelete)="onDeleteNote($event)"></app-com-note>
     </div>
 </md-list>
-
-<!--
-<app-com-note [isiNote]="noteList[1]" (onDelete)="onDeleteNote($event)"></app-com-note>
-<app-com-note [isiNote]="noteList[2]" (onDelete)="onDeleteNote($event)"></app-com-note>
--->

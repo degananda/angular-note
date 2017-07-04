@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormNoteComponent } from './form-note.component';
+import { ComSearchComponent } from './com-search.component';
 
-describe('FormNoteComponent', () => {
-  let component: FormNoteComponent;
-  let fixture: ComponentFixture<FormNoteComponent>;
+describe('ComSearchComponent', () => {
+  let component: ComSearchComponent;
+  let fixture: ComponentFixture<ComSearchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormNoteComponent ]
+      declarations: [ ComSearchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormNoteComponent);
+    fixture = TestBed.createComponent(ComSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

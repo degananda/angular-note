@@ -19,7 +19,8 @@ import {
   MdIconModule,
   MdSnackBarModule,
   MdTooltipModule,
-  MdMenuModule
+  MdMenuModule,
+  MdCardModule,
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -29,6 +30,8 @@ import { myRouter } from './app.router';
 // services
 import { ServiceNoteService } from './service-note.service';
 import { ComAddnoteComponent } from './com-addnote/com-addnote.component';
+import { ComSearchComponent } from './com-search/com-search.component';
+import { PipeSearchPipe } from './pipe-search.pipe';
 
 // dari newbie untuk newbie
 @NgModule({
@@ -38,7 +41,9 @@ import { ComAddnoteComponent } from './com-addnote/com-addnote.component';
     PipeSensorPipe,
     FormNoteComponent,
     ComListnoteComponent,
-    ComAddnoteComponent
+    ComAddnoteComponent,
+    ComSearchComponent,
+    PipeSearchPipe
   ],
   imports: [
     BrowserModule,
@@ -47,14 +52,15 @@ import { ComAddnoteComponent } from './com-addnote/com-addnote.component';
     myRouter,
     BrowserAnimationsModule,
     // material component
-    MdButtonModule,
+    MdButtonModule, 
     MdInputModule,
     MdListModule,
     MdToolbarModule,
     MdIconModule,
     MdSnackBarModule,
     MdTooltipModule,
-    MdMenuModule
+    MdMenuModule,
+    MdCardModule,
     // end of material component
   ],
   providers: [
