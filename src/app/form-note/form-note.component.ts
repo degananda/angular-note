@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -12,7 +12,9 @@ import {MdSnackBar} from '@angular/material';
 @Component({
   selector: 'app-form-note',
   templateUrl: './form-note.component.html',
-  styleUrls: ['./form-note.component.css']
+  styleUrls: ['./form-note.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+  
 })
 export class FormNoteComponent implements OnInit {
 

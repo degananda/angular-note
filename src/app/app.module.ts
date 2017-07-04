@@ -21,6 +21,7 @@ import {
   MdTooltipModule,
   MdMenuModule,
   MdCardModule,
+  MdProgressSpinnerModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -30,8 +31,9 @@ import { myRouter } from './app.router';
 // services
 import { ServiceNoteService } from './service-note.service';
 import { ComAddnoteComponent } from './com-addnote/com-addnote.component';
-import { ComSearchComponent } from './com-search/com-search.component';
 import { PipeSearchPipe } from './pipe-search.pipe';
+import { ComSearchComponent } from './com-search/com-search.component';
+import { ComLoadingComponent } from './com-loading/com-loading.component';
 
 // dari newbie untuk newbie
 @NgModule({
@@ -42,8 +44,9 @@ import { PipeSearchPipe } from './pipe-search.pipe';
     FormNoteComponent,
     ComListnoteComponent,
     ComAddnoteComponent,
+    PipeSearchPipe,
     ComSearchComponent,
-    PipeSearchPipe
+    ComLoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,7 @@ import { PipeSearchPipe } from './pipe-search.pipe';
     myRouter,
     BrowserAnimationsModule,
     // material component
-    MdButtonModule, 
+    MdButtonModule,
     MdInputModule,
     MdListModule,
     MdToolbarModule,
@@ -61,6 +64,7 @@ import { PipeSearchPipe } from './pipe-search.pipe';
     MdTooltipModule,
     MdMenuModule,
     MdCardModule,
+    MdProgressSpinnerModule
     // end of material component
   ],
   providers: [

@@ -1,9 +1,13 @@
 <div style="margin-left: 50px; margin-right: 50px; margin-top: 25px;">
   <md-card>
-    <p md-list>
+      <div style="float:left; width: 90%;">
       <md-input-container style="width: 100%;">
-        <input mdInput placeholder="Cari isi note" type="text" #querySearch (change)="onSearchChange(querySearch.value)">
+        <input mdInput placeholder="Cari berdasarkan isi note" type="text" #querySearch (keyup)="startTyping(querySearch.value)" (keydown)="endTyping()">
       </md-input-container>
-    </p>
+      </div>
+      <div style="float: right; width: 10%; text-align: center;">
+          <md-spinner *ngIf="onLoading" style="width: 20px; color: #3F51B5; margin-top: -20px; display:inline-block;"></md-spinner>
+      </div>
+      <div style="clear: both;"></div>
   </md-card>
 </div>

@@ -1,6 +1,6 @@
 <md-toolbar color="primary">Angular Note</md-toolbar>
 <!-- search form -->
-<app-com-search (searchQueryElement)="doSearch($event)"></app-com-search>
+<app-com-search (searchQueryElement)="doSearch($event)" (onSearchLoading)="onLoadingChange($event)"></app-com-search>
 <!-- end of search form -->
 
 <!-- add note form -->
@@ -10,7 +10,23 @@
 
 
 <md-list style="width: 100%;">  
-    <div style="margin-left: 50px; margin-right: 50px;" *ngFor="let note of (serviceNoteService.listNote | pipeSearch:searchQuery)">  
-            <app-com-note [isiNote]="note" (onDelete)="onDeleteNote($event)"></app-com-note>
+
+    <!-- loading component -->
+    <app-com-loading *ngIf="onSearchLoading"></app-com-loading>
+    <!-- end of loading component -->
+
+    <div *ngIf="!onSearchLoading">
+        <div style="margin-left: 50px; margin-right: 50px;" *ngFor="let note of (serviceNoteService.listNote | pipeSearch:searchQuery)">  
+                <app-com-note [isiNote]="note" (onDelete)="onDeleteNote($event)"></app-com-note>
+        </div>
     </div>
+
+    <div *ngIf="listNote.length <= 0 && !onSearchLoading">
+        <div style="margin-left: 50px; margin-right: 50px; color: #3d3d3d;">
+            <div style="width: 100%; background: #fafafa; padding: 50px 0px 50px 0px; text-align: center;">      <md-icon style="font-size: 70px; color: #3F51B5; display: inline;">description</md-icon><br />
+                <b>Belum ada data</b> pada sistem angular-note<br /> silahkan masukan note melalui form diatas.
+            </div>
+        </div>
+    </div>
+
 </md-list>

@@ -13,6 +13,7 @@ export class ComListnoteComponent implements OnInit {
 
   listNote : Array<NoteModel>;
   searchQuery = "";
+  onSearchLoading = false;
 
   constructor(
     public serviceNoteService : ServiceNoteService,
@@ -30,7 +31,10 @@ export class ComListnoteComponent implements OnInit {
     this.searchQuery = value;
   }
 
-
+  onLoadingChange(value){
+    this.onSearchLoading = value;
+  }
+  
   ngOnInit() {
     this.listNote = this.serviceNoteService.getNote();
   }
