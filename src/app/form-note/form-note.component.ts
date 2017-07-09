@@ -53,22 +53,22 @@ export class FormNoteComponent implements OnInit {
   ngOnInit() {
     // insiiasi from setelah note data 
     this.noteForm = this.fb.group({
-      isi_note : this.fb.control('', [Validators.required])
+      isi_note : this.fb.control('', [Validators.required]),
+      judul_note : this.fb.control('', [Validators.required])
     });
 
     // get note index
     this.routeSubscription = this.activatedRoute.params.subscribe(
       (res) => {
         this.noteIndex = res['id'];
-        console.log(this.noteIndex);
 
-        // get note setelah subscription karena kita membutuhkan noteIndex dari parameter routing.
-        this.noteData = this.serviceNoteService.getNoteSingle(this.noteIndex);
-        if(this.noteData){
-          this.noteForm.controls['isi_note'].setValue(this.noteData.isi_note);
-        } else {
-          this.router.navigate(['/']);
-        }
+        // set value dari mongodb
+        this.serviceNoteService.getNoteSingle(this.noteIndex).subscribe(
+          (res) => {
+            this.noteForm.controls['isi_note'].setValue(res[0]['isi_note']);
+            this.noteForm.controls['judul_note'].setValue(res[0]['isi_note']);
+          }
+        )
 
       }
     )
@@ -76,10 +76,12 @@ export class FormNoteComponent implements OnInit {
 
   onSubmit(value){
     let newTimetamp = new Date().getTime();
-    this.noteData.isi_note = value.isi_note;
-    this.noteData.tanggal_note = newTimetamp.toString();
-    this.serviceNoteService.ubahNote(this.noteIndex, this.noteData);
-    this.openSnackBar();
+    value.date_updated = newTimetamp.toString();
+    this.serviceNoteService.ubahNote(value, this.noteIndex).subscribe(
+      (res) => {
+        this.openSnackBar();
+      }
+    )
   }
 
 }

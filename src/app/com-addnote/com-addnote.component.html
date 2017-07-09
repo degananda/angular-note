@@ -1,6 +1,9 @@
 <div class="add_note_form">
   <form [formGroup]="noteForm" (ngSubmit)="onSubmit(noteForm.value)">
     <p>
+      <md-input-container style="width: 100%;" mdTooltip="Masukan judul note">
+        <input mdInput placeholder="Isi Judul note" formControlName="judul_note">
+      </md-input-container>
       <md-input-container style="width: 100%;" mdTooltip="Masukan isi note">
         <textarea mdInput placeholder="Isi Catatan" formControlName="isi_note" placehoder="Masukan note" cols="5"></textarea>
       </md-input-container>

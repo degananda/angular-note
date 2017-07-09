@@ -32,16 +32,29 @@ export class ComAddnoteComponent implements OnInit {
   ngOnInit() {
     // inisiasi form
     this.noteForm = this.fb.group({
-      isi_note : this.fb.control('', [Validators.required])
+      isi_note : this.fb.control('', [Validators.required]),
+      judul_note : this.fb.control('', [Validators.required])
     })
+  }
+
+  getCurrentNote(){
+    this.serviceNoteService.getNote().subscribe(
+      (res) => {
+        this.serviceNoteService.listNote = res;
+      }
+    )
   }
 
   onSubmit(value){
     // menghandle saat form disubmit
-    let dateNow = new Date().getTime();
+    let dateNow = new Date().getTime().toString();
     value.tanggal_note = dateNow;
-    let myNote : NoteModel = new NoteModel(value.isi_note, value.tanggal_note);
-    this.serviceNoteService.addNote(myNote);
+    let myNote : NoteModel = new NoteModel(value.judul_note, value.isi_note, value.tanggal_note);
+    this.serviceNoteService.addNote(myNote).subscribe(
+      (res) => {
+        this.getCurrentNote();
+      }
+    )
     // reset form
     this.noteForm.reset();
     this.openSnackBar();

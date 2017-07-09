@@ -11,7 +11,7 @@ import { ServiceNoteService } from './../service-note.service';
 })
 export class ComNoteComponent implements OnInit {
 
-  @Input() isiNote : NoteModel;
+  @Input() isiNote;
   @Output() onDelete = new EventEmitter();
 
   // styling
@@ -40,12 +40,7 @@ export class ComNoteComponent implements OnInit {
   
   deleteNote(){
     // emit id dari note, karena kita belum membuat model dan service dari note maka sementara kita isikan "1" sebagai id dummy. 
-    this.onDelete.emit(this.isiNote);
-  }
-
-  modifyNote(){
-    let noteIndex = this.serviceNoteService.getNoteIndex(this.isiNote);
-    this.router.navigate(['/note/modify/'+noteIndex]);
+    this.onDelete.emit(this.isiNote._id);
   }
   
   /*

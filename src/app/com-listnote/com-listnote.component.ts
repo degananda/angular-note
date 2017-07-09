@@ -11,7 +11,6 @@ import {MdSnackBar} from '@angular/material';
 })
 export class ComListnoteComponent implements OnInit {
 
-  listNote : Array<NoteModel>;
   searchQuery = "";
   onSearchLoading = false;
   searchTypeValue: string = 'asc';
@@ -42,12 +41,24 @@ export class ComListnoteComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.listNote = this.serviceNoteService.getNote();
+    this.getCurrentNote();
   }
 
-  onDeleteNote(note : NoteModel){
-    this.serviceNoteService.deleteNote(note);
-    this.openSnackBar();
+  getCurrentNote(){
+    this.serviceNoteService.getNote().subscribe(
+      (res) => {
+        this.serviceNoteService.listNote = res;
+      }
+    )
+  }
+
+  onDeleteNote(id){
+    this.serviceNoteService.deleteNote(id).subscribe(
+      (res) => {
+          this.openSnackBar();
+          this.getCurrentNote();
+      }
+    )
   }
 
 }

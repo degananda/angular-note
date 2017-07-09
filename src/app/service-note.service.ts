@@ -1,4 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+// Import RxJs required methods
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 // class
 import { NoteModel } from './note-model';
 // model 
@@ -6,37 +11,71 @@ import { NoteModel } from './note-model';
 @Injectable()
 export class ServiceNoteService {
 
-  listNote : Array<NoteModel> = [];
+  listNote : any = [];
 
-  constructor() { 
+  constructor(
+    private http : Http
+  ) { 
   }
 
-  getNote(){
-    return this.listNote;
+  getNote() : Observable<NoteModel[]>{
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let username : string = 'degananda';
+    let password : string = 'indonesiaraya';           
+    headers.append("Authorization", "Basic " + btoa(username + ":" + password)); 
+    let options       = new RequestOptions({ headers: headers });
+    return this.http.get('http://localhost:7250/note', options).map(
+      (res : Response) => res.json()
+    );
   }
 
-  addNote(note : NoteModel){
-    this.listNote.push(note);
+  addNote(note : NoteModel) : Observable<any>{
+    //this.listNote.push(note);
+    let requestBody = JSON.stringify(note);
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let username : string = 'degananda';
+    let password : string = 'indonesiaraya';           
+    headers.append("Authorization", "Basic " + btoa(username + ":" + password)); 
+    let options       = new RequestOptions({ headers: headers });
+    return this.http.post('http://localhost:7250/note', requestBody, options).map(
+      (res : Response) => res.json()
+    );
+
+
   }
 
-  getNoteSingle(noteIndex){
-    return this.listNote[noteIndex];
+  getNoteSingle(id) : Observable<NoteModel>{
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let username : string = 'degananda';
+    let password : string = 'indonesiaraya';           
+    headers.append("Authorization", "Basic " + btoa(username + ":" + password)); 
+    let options       = new RequestOptions({ headers: headers });
+    return this.http.get('http://localhost:7250/note/'+id, options).map(
+      (res : Response) => res.json()
+    );
   }
 
-  getNoteIndex(note : NoteModel){
-    // mencari index dari note terkait.
-    return this.listNote.indexOf(note);
+  ubahNote(note : NoteModel,id) : Observable<any>{
+    let requestBody = JSON.stringify(note);
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let username : string = 'degananda';
+    let password : string = 'indonesiaraya';           
+    headers.append("Authorization", "Basic " + btoa(username + ":" + password)); 
+    let options       = new RequestOptions({ headers: headers });
+    return this.http.put('http://localhost:7250/note/'+id, requestBody, options).map(
+      (res : Response) => res.json()
+    );
   }
 
-  ubahNote(noteIndex, newNote : NoteModel){
-    // mencari index dari note terkait.
-    this.listNote[noteIndex] = newNote;
-  }
-
-  deleteNote(note : NoteModel){
-    // mencari index dari note terkait.
-    let noteIndex = this.listNote.indexOf(note);
-    this.listNote.splice(noteIndex, 1);
+  deleteNote(id){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let username : string = 'degananda';
+    let password : string = 'indonesiaraya';           
+    headers.append("Authorization", "Basic " + btoa(username + ":" + password)); 
+    let options       = new RequestOptions({ headers: headers });
+    return this.http.delete('http://localhost:7250/note/'+id, options).map(
+      (res : Response) => res.json()
+    );
   }
 
 }
